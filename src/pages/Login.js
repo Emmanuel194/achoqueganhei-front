@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 import Register from "../components/Register";
 import ResetPassword from "../components/ResetPassword";
 
@@ -8,8 +9,10 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [showRegister, setShowRegister] = useState(false);
   const [showResetPassword, setShowResetPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,7 +22,8 @@ const Login = () => {
         { email, password }
       );
       localStorage.setItem("token", response.data.token);
-      window.location.href = "/dashboard"; // ajuste conforme necessário
+      setSuccess("Login efetuado com sucesso!");
+      navigate("/dashboard");
     } catch (err) {
       setError("Credenciais inválidas. Tente novamente.");
     }
@@ -33,6 +37,7 @@ const Login = () => {
       <div className="login-form">
         <h2>Login</h2>
         {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-container">
             <label>Email:</label>
@@ -54,7 +59,9 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" className="login-button">
+            Login
+          </button>{" "}
           <div className="links">
             <button
               type="button"

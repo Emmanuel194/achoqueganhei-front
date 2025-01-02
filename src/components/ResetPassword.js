@@ -38,9 +38,15 @@ const ResetPassword = ({ onClose }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              placeholder="Digite seu e-mail"
             />
           </div>
-          <button type="submit">Enviar</button>
+          <div className="button-container">
+            <button type="submit">Enviar</button>
+            <button type="button" className="cancel" onClick={onClose}>
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </div>
