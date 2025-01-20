@@ -11,6 +11,7 @@ const Resultados = () => {
     timemania: [],
     duplasena: [],
     federal: [],
+    milionaria: [],
   });
 
   useEffect(() => {
